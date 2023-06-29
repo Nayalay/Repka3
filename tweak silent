@@ -1,0 +1,71 @@
+{
+  "extends": [
+    "stylelint-config-twbs-bootstrap"
+  ],
+  "reportInvalidScopeDisables": true,
+  "reportNeedlessDisables": true,
+  "overrides": [
+    {
+      "files": "**/*.scss",
+      "rules": {
+        "declaration-property-value-disallowed-list": {
+          "border": "none",
+          "outline": "none"
+        },
+        "function-disallowed-list": [
+          "calc",
+          "lighten",
+          "darken"
+        ],
+        "property-disallowed-list": [
+          "border-radius",
+          "border-top-left-radius",
+          "border-top-right-radius",
+          "border-bottom-right-radius",
+          "border-bottom-left-radius",
+          "transition"
+        ],
+        "scss/dollar-variable-default": [
+          true,
+          {
+            "ignore": "local"
+          }
+        ],
+        "scss/selector-no-union-class-name": true
+      }
+    },
+    {
+      "files": "scss/**/*.{test,spec}.scss",
+      "rules": {
+        "scss/dollar-variable-default": null,
+        "declaration-no-important": null
+      }
+    },
+    {
+      "files": "site/**/*.scss",
+      "rules": {
+        "scss/dollar-variable-default": null
+      }
+    },
+    {
+      "files": "site/**/examples/**/*.css",
+      "rules": {
+        "comment-empty-line-before": null,
+        "property-no-vendor-prefix": null,
+        "selector-no-qualifying-type": null,
+        "value-no-vendor-prefix": null
+      }
+    }
+  ]
+}
+  2 changes: 1 addition & 1 deletion2  
+package.json
+@@ -45,7 +45,7 @@
+    "css-compile": "sass --style expanded --source-map --embed-sources --no-error-css scss/:dist/css/",
+    "css-rtl": "cross-env NODE_ENV=RTL postcss --config build/postcss.config.js --dir \"dist/css\" --ext \".rtl.css\" \"dist/css/*.css\" \"!dist/css/*.min.css\" \"!dist/css/*.rtl.css\"",
+    "css-lint": "npm-run-all --aggregate-output --continue-on-error --parallel css-lint-*",
+    "css-lint-stylelint": "stylelint \"**/*.{css,scss}\" --cache --cache-location .cache/.stylelintcache --rd",
+    "css-lint-stylelint": "stylelint \"**/*.{css,scss}\" --cache --cache-location .cache/.stylelintcache",
+    "css-lint-vars": "fusv scss/ site/assets/scss/",
+    "css-minify": "npm-run-all --aggregate-output --parallel css-minify-*",
+    "css-minify-main": "cleancss -O1 --format breakWith=lf --with-rebase --source-map --source-map-inline-sources --output dist/css/ --batch --batch-suffix \".min\" \"dist/css/*.css\" \"!dist/css/*.min.css\" \"!dist/css/*rtl*.css\"",
